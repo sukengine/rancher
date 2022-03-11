@@ -1,6 +1,7 @@
-#Note for day 1
+#Rancher clasee note - day 1
 
 ---
+
 Lab sheet หน้า 59 ข้อ 11
 Prometheus Alert Rules - PromQL Expression ปรับขนาด CPU จาก > 2 เป็น >1 เพื่อให้ Alert Rules firing
 
