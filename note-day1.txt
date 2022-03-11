@@ -1,0 +1,15 @@
+#Note for day 1
+
+---
+Lab sheet หน้า 59 ข้อ 11
+Prometheus Alert Rules - PromQL Expression ปรับขนาด CPU จาก > 2 เป็น >1 เพื่อให้ Alert Rules firing
+
+(count by(cluster, node) (sum by(node, cpu) (node_cpu_seconds_total{job="node-exporter"} * on(namespace, pod) group_left(node) topk by(namespace, pod) (1, node_namespace_pod:kube_pod_info:)))) > 1
+
+
+---
+
+
+
+
+
