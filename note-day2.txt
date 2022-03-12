@@ -1,3 +1,4 @@
-#Rancher clasee note - day 2
+#day 2
 
 ---
+p.xx - bla bla
