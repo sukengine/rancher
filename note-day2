@@ -18,6 +18,7 @@ p.59 - PromQL
 ---
 p.61 - Slack webhook
 https://hooks.slack.com/services/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
+https://hooks.slack.com/services/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
 ---
 p.68 - Loki Repository URL
 https://grafana.github.io/helm-charts
