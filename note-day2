@@ -20,7 +20,6 @@ p.59 - PromQL
 (count by(cluster, node) (sum by(node, cpu) (node_cpu_seconds_total{job="node-exporter"} * on(namespace, pod) group_left(node) topk by(namespace, pod) (1, node_namespace_pod:kube_pod_info:)))) > 1
 ---
 p.61 - Slack webhook
-https://hooks.slack.com/services/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
 https://hooks.slack.com/services/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
 ---
 p.68 - Loki Repository URL
