@@ -7,6 +7,9 @@ Cluster menu -> Cluster Tools -> OPA Gatekeeper -> Install
 ---
 p.47 OPA-Template link
 https://raw.githubusercontent.com/open-policy-agent/gatekeeper-library/master/library/general/replicalimits/template.yaml
+
+Example constraints-paramaters
+https://github.com/open-policy-agent/gatekeeper-library/blob/master/library/general/containerlimits/samples/container-must-have-limits/constraint.yaml#L5
 ---
 p.51 - Constraints-parameters
 ranges:
