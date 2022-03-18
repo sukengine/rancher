@@ -20,7 +20,7 @@ p.59 - PromQL
 (count by(cluster, node) (sum by(node, cpu) (node_cpu_seconds_total{job="node-exporter"} * on(namespace, pod) group_left(node) topk by(namespace, pod) (1, node_namespace_pod:kube_pod_info:)))) > 1
 ---
 p.61 - Slack webhook
-https://hooks.slack.com/services/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
+*use the webhook from team chat*
 ---
 p.68 - Loki Repository URL
 https://grafana.github.io/helm-charts
