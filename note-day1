@@ -1,3 +1,80 @@
-#day 1
+#day 1-2
 
 ---
+p.47 Install OPA Gatekeeper
+Main Menu -> Select rke-workload-cluster
+Cluster menu -> Cluster Tools -> OPA Gatekeeper -> Install
+---
+p.47 OPA-Template link
+https://raw.githubusercontent.com/open-policy-agent/gatekeeper-library/master/library/general/replicalimits/template.yaml
+
+Example constraints-paramaters
+https://github.com/open-policy-agent/gatekeeper-library/blob/master/library/general/containerlimits/samples/container-must-have-limits/constraint.yaml#L5
+---
+p.51 - Constraints-parameters
+ranges:
+- min_replicas: 1
+- max_replicas: 2
+---
+p.59 - PromQL
+(count by(cluster, node) (sum by(node, cpu) (node_cpu_seconds_total{job="node-exporter"} * on(namespace, pod) group_left(node) topk by(namespace, pod) (1, node_namespace_pod:kube_pod_info:)))) > 1
+---
+p.61 - Slack webhook
+*use the webhook from team chat*
+---
+p.68 - Loki Repository URL
+https://grafana.github.io/helm-charts
+---
+p.71 - Target
+http://my-loki.loki:3100
+---
+p.72 - Output Buffer
+timekey: 30s
+timekey_use_utc: true
+timekey_wait: 10s
+flush_interval: 5sema for logging.banzaicloud.io.v1beta1.output.spec.awsElasticsearch.buffer
+
+---
+#overlaytest.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: overlaytest
+spec:
+  selector:
+      matchLabels:
+        name: overlaytest
+  template:
+    metadata:
+      labels:
+        name: overlaytest
+    spec:
+      tolerations:
+      - operator: Exists
+      containers:
+      - image: rancherlabs/swiss-army-knife
+        imagePullPolicy: Always
+        name: overlaytest
+        command: ["sh", "-c", "tail -f /dev/null"]
+        terminationMessagePath: /dev/termination-log
+---
+#overlaytest command
+#!/bin/bash
+echo "=> Start network overlay test"
+  kubectl get pods -l name=overlaytest -o jsonpath='{range .items[*]}{@.metadata.name}{" "}{@.spec.nodeName}{"\n"}{end}' |
+  while read spod shost 
+    do kubectl get pods -l name=overlaytest -o jsonpath='{range .items[*]}{@.status.podIP}{" "}{@.spec.nodeName}{"\n"}{end}' |
+    while read tip thost
+      do kubectl --request-timeout='10s' exec $spod -c overlaytest -- /bin/sh -c "ping -c2 $tip > /dev/null 2>&1"
+        RC=$?
+        if [ $RC -ne 0 ]
+          then echo FAIL: $spod on $shost cannot reach pod IP $tip on $thost
+          else echo $shost can reach $thost
+        fi
+    done
+  done
+echo "=> End network overlay test"
+
+---
+#Install kubectl
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
