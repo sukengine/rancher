@@ -76,5 +76,18 @@ echo "=> Start network overlay test"
 echo "=> End network overlay test"
 
 ---
-#Install kubectl
+#install kubectl on linux
 https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+
+#install kubectl on macOS
+https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/
+
+#install kubectl on Windows
+https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+---
+#Get Started with Rancher in 2 Easy Steps
+https://rancher.com/quick-start
+
+
+
